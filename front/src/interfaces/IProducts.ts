@@ -1,4 +1,4 @@
-interface Iproducts {
+interface IProducts {
   name: string;
   price: number;
   description: string;
@@ -7,6 +7,4 @@ interface Iproducts {
   stock: number;
 }
 
-export default Iproducts;
-
-
+export type { IProducts };

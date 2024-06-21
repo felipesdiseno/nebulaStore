@@ -4,5 +4,5 @@ import { getProducts } from "../controllers/product.controller";
 const router = Router();
 
 router.get("/", getProducts);
-
+//getProductById falta crear en el servidor
 export default router;
