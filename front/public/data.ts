@@ -1,7 +1,8 @@
-import { IProducts } from "@/interfaces/IProducts";
+import { IProduct } from "@/interfaces/IProduct";
 
-const products: IProducts[] = [
+export const product: IProduct[] = [
   {
+    id: 1,
     name: "iPhone 11",
     price: 699,
     description:
@@ -12,6 +13,8 @@ const products: IProducts[] = [
     stock: 10,
   },
   {
+    id: 2,
+
     name: "MacBook Air",
     price: 999,
     description:
@@ -22,6 +25,8 @@ const products: IProducts[] = [
     stock: 10,
   },
   {
+    id: 3,
+
     name: "iPad Pro",
     price: 799,
     description:
@@ -32,6 +37,8 @@ const products: IProducts[] = [
     stock: 10,
   },
   {
+    id: 4,
+
     name: "Apple Watch Series 6",
     price: 399,
     description:
@@ -42,6 +49,8 @@ const products: IProducts[] = [
     stock: 10,
   },
   {
+    id: 5,
+
     name: "AirPods Pro",
     price: 249,
     description:
@@ -52,6 +61,8 @@ const products: IProducts[] = [
     stock: 10,
   },
   {
+    id: 6,
+
     name: "HomePod mini",
     price: 99,
     description:
@@ -62,5 +73,3 @@ const products: IProducts[] = [
     stock: 10,
   },
 ];
-
-export default products;

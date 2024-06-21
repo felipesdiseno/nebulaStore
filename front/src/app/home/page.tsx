@@ -1,10 +1,11 @@
-import Products from "../page";
+import ProductList from "@/components/productList";
+import { product } from "../../../public/data";
 
 function Home() {
   return (
     <div>
       <h1>Home*</h1>
-      <Products />
+      <ProductList products={product} />
     </div>
   );
 }

@@ -1,4 +1,5 @@
-interface IProducts {
+interface IProduct {
+  id: number;
   name: string;
   price: number;
   description: string;
@@ -7,4 +8,4 @@ interface IProducts {
   stock: number;
 }
 
-export type { IProducts };
+export type { IProduct };
