@@ -5,7 +5,6 @@ function AboutLayout({
 }>) {
   return (
     <div>
-      <h1>esta es una sidebar</h1>
       <main>{children}</main>
     </div>
   );
