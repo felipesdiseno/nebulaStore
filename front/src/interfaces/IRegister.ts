@@ -1,9 +1,9 @@
-
-
-
 interface IregisterUser {
-    name:,
-    email:,
-    password:,
-    
+  name: string;
+  email: string;
+  password: string;
+  address: string;
+  phone: string;
 }
+
+export default IregisterUser;

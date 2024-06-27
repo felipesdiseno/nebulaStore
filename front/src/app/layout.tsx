@@ -22,11 +22,11 @@ export default function RootLayout({
         <link rel="icon" href="/icons/nebula.png" />
       </head>
       <body className={inter.className}>
-        <Navbar />
-        <main>{children}</main>
-        <footer>
+        <div className="flex flex-col min-h-screen">
+          <Navbar />
+          <main className="flex-1">{children}</main>
           <Footer />
-        </footer>
+        </div>
       </body>
     </html>
   );

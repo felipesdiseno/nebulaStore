@@ -1,10 +1,7 @@
-"use client";
 import { IProduct } from "@/interfaces/IProduct";
 import Link from "next/link";
 import DetailsCard from "../DetailsCard";
 import { useState } from "react";
-
-// import Image from "next/image";
 
 function Card({ product }: { product: IProduct }) {
   const [showDetails, setShowDetails] = useState(false);
@@ -14,23 +11,49 @@ function Card({ product }: { product: IProduct }) {
   };
 
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-xs mx-auto my-4">
-      <div>
-        <img src={product.image} alt={product.name} className="" />
-      </div>
-      <h2>{product.name}</h2>
-
-      <h1> Stock: {product.stock} und.</h1>
-      <h1>Precio: ${product.price}</h1>
-
-      <button
-        onClick={showDetailsCard}
-        className="bg-blue-500 text-white font-bold py-2 px-4 rounded mt-4 hover:bg-blue-700 transition duration-300"
+    <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-xs mx-auto my-4 m-4 p-4 relative">
+      <div
+        className="mb-6 rounded-sm"
+        style={{ height: "200px", width: "230px" }}
       >
-        {showDetails ? "Ocultar detalles" : "Ver detalles"}
-      </button>
+        <img
+          src={product.image}
+          alt={product.name}
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <div className="mb-4">
+        <h2 className="text-xl font-semibold">{product.name}</h2>
+        <h3 className="text-gray-600">Stock: {product.stock} und.</h3>
+        <h3 className="text-gray-600">Precio: ${product.price}</h3>
+      </div>
+      <div className="flex justify-between">
+        <button
+          onClick={showDetailsCard}
+          className={`bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300 ${
+            showDetails ? "bg-red-500" : ""
+          }`}
+          style={{
+            zIndex: 10,
+            whiteSpace: "nowrap", // Evita que el texto se divida en varias líneas
+            overflow: "hidden", // Oculta cualquier desbordamiento de texto
+            textOverflow: "ellipsis", // Agrega puntos suspensivos si el texto es demasiado largo
+          }}
+        >
+          {showDetails ? "Ocultar detalles" : "Ver detalles"}
+        </button>
 
-      {showDetails && <DetailsCard product={product} />}
+        <button
+          className={`bg-purple-500 text-white font-bold py-2 px-4 rounded hover:bg-purple-600 transition duration-300`}
+        >
+          <img src="/icons/cart.svg" alt="carrito" className="h-6 w-6" />
+        </button>
+      </div>
+      {showDetails && (
+        <div className="absolute top-0 left-0 right-0 bottom-0 w-full h-full bg-white opacity-95 flex items-center justify-center p-4">
+          <DetailsCard product={product} />
+        </div>
+      )}
     </div>
   );
 }
