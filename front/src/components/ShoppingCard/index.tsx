@@ -4,7 +4,6 @@ function ShoppingCard() {
   return (
     <div>
       <h1>items comprados</h1>
-      <ProductList products={product} />
     </div>
   );
 }

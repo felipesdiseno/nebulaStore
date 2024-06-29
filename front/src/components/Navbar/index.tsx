@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -25,6 +26,12 @@ export default function Navbar() {
             className="text-gray-500 hover:text-gray-700"
           >
             ingresar
+          </Link>
+          <Link
+            href="/shoppingCart"
+            className="text-gray-500 hover:text-gray-700"
+          >
+            carrito compras
           </Link>
         </div>
       </div>

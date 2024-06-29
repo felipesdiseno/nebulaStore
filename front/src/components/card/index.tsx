@@ -35,9 +35,9 @@ function Card({ product }: { product: IProduct }) {
           }`}
           style={{
             zIndex: 10,
-            whiteSpace: "nowrap", // Evita que el texto se divida en varias líneas
-            overflow: "hidden", // Oculta cualquier desbordamiento de texto
-            textOverflow: "ellipsis", // Agrega puntos suspensivos si el texto es demasiado largo
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
           }}
         >
           {showDetails ? "Ocultar detalles" : "Ver detalles"}
