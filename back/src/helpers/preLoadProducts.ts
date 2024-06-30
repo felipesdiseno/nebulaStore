@@ -18,7 +18,7 @@ const productsToPreLoad: IProduct[] = [
     description:
       "Experience power and elegance with the iPhone 11: capture stunning moments with its dual-camera system, enjoy exceptional performance, and immerse yourself in a brilliant Liquid Retina display. Discover a world of possibilities in the palm of your hand!",
     image:
-      "https://mac-center.com/cdn/shop/files/194252097236-7_823x.jpg?v=1709763494",
+      "https://assets.swappie.com/cdn-cgi/image/width=600,height=600,fit=contain,format=auto/swappie-iphone-11-pro-max-silver.png?v=c55f0ca6",
     categoryId: 1,
     stock: 10,
   },
@@ -28,7 +28,7 @@ const productsToPreLoad: IProduct[] = [
     description:
       "Embrace efficiency and sophistication with the MacBook Air: lightweight design meets powerful performance, stunning Retina display brings your work to life, and all-day battery life keeps you productive wherever you go. Elevate your computing experience with the MacBook Air.",
     image:
-      "https://www.apple.com/newsroom/images/product/mac/standard/Apple_new-macbookair-wallpaper-screen_11102020_big.jpg.large.jpg",
+      "https://photos5.appleinsider.com/price_guide/m2-macbook-air-15-inch-midnight-pp-header.png",
     categoryId: 2,
     stock: 10,
   },
@@ -48,7 +48,7 @@ const productsToPreLoad: IProduct[] = [
     description:
       "Stay connected and healthy with the Apple Watch Series 6: track your workouts, monitor your health, and stay in touch with the people and information you care about most. Experience the future of health and wellness with the Apple Watch Series 6.",
     image:
-      "https://www.apple.com/newsroom/images/product/watch/standard/Apple_watch-series-6-aluminum-blue-case_09152020_carousel.jpg.large.jpg",
+      "https://png.pngtree.com/png-vector/20231104/ourmid/pngtree-apple-airpods-pro-png-image_10477533.png",
     categoryId: 4,
     stock: 10,
   },
