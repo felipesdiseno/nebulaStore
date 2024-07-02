@@ -1,13 +1,8 @@
-import ProductList from "../ProductList";
-import { product } from "../../../public/data";
-function ShoppingCard() {
-  return (
-    <div>
-      <h1>items comprados</h1>
-    </div>
-  );
+"use client";
+function ShoppingCart() {
+  return <div></div>;
 }
 
-export default ShoppingCard;
+export default ShoppingCart;
 
 //tarjeta que renderiza cada articulo comprado

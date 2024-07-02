@@ -18,7 +18,7 @@ const productsToPreLoad: IProduct[] = [
     description:
       "Experience power and elegance with the iPhone 11: capture stunning moments with its dual-camera system, enjoy exceptional performance, and immerse yourself in a brilliant Liquid Retina display. Discover a world of possibilities in the palm of your hand!",
     image:
-      "https://assets.swappie.com/cdn-cgi/image/width=600,height=600,fit=contain,format=auto/swappie-iphone-11-pro-max-silver.png?v=c55f0ca6",
+      "https://mac-center.com/cdn/shop/files/194252097236-7_823x.jpg?v=1709763494",
     categoryId: 1,
     stock: 10,
   },
@@ -48,7 +48,7 @@ const productsToPreLoad: IProduct[] = [
     description:
       "Stay connected and healthy with the Apple Watch Series 6: track your workouts, monitor your health, and stay in touch with the people and information you care about most. Experience the future of health and wellness with the Apple Watch Series 6.",
     image:
-      "https://png.pngtree.com/png-vector/20231104/ourmid/pngtree-apple-airpods-pro-png-image_10477533.png",
+      "https://fastexpo.net/wp-content/smush-webp/2019/10/Apple-Watch-Apple-Watch-Iwatch-PNG-Image.png.webp",
     categoryId: 4,
     stock: 10,
   },

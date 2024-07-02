@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import LandingPageComponent from "./landingPage/page";
 
 function LandingPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -18,18 +19,16 @@ function LandingPage() {
     setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
   };
 
-  // retroceder al slide anterior
   const prevSlide = () => {
     setCurrentSlide(
       (prevSlide) => (prevSlide - 1 + slides.length) % slides.length
     );
   };
 
-  // Efecto para avanzar automáticamente los slides
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
-    }, 5000); // Cambia este valor para ajustar la velocidad de cambio
+    }, 5000);
     return () => clearInterval(interval);
   }, [slides.length]);
 
@@ -62,7 +61,7 @@ function LandingPage() {
             key={index}
             type="button"
             className={`w-3 h-3 rounded-full ${
-              index === currentSlide ? "bg-white" : "bg-gray-400"
+              index === currentSlide ? "bg-blue-500" : "bg-gray-400"
             }`}
             onClick={() => setCurrentSlide(index)}
             aria-label={`Slide ${index + 1}`}
@@ -120,6 +119,7 @@ function LandingPage() {
           <span className="sr-only">Next</span>
         </span>
       </button>
+      <LandingPageComponent />
     </div>
   );
 }

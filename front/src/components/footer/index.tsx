@@ -8,7 +8,7 @@ export default function Footer() {
       <p>Desarrollado por felipesdiseno</p>
       <div>
         <h3>sigueme en mis redes: </h3>
-        <div className="flex justify-center space-x-5 p-4">
+        <div className="flex justify-center space-x-5 p-2">
           <Link href="https://github.com/felipesdiseno">
             <Image src="/icons/github.svg" alt="github" width={30} height={0} />
           </Link>

@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-
+import { BsCart4 } from "react-icons/bs";
 export default function Navbar() {
   return (
     <nav className="bg-white border-b-2">
@@ -12,26 +12,20 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center space-x-6 ml-auto">
-          <Link
-            href="/home"
-            className="text-gray-500 hover:text-gray-700 transform scale-110"
-          >
+          <Link href="/home" className="text-gray-500 hover:text-blue-500">
             Home
           </Link>
-          <Link href="/about" className="text-gray-500 hover:text-gray-700">
+          <Link href="/about" className="text-gray-500 hover:text-blue-500">
             About
           </Link>
           <Link
             href="/authentication"
-            className="text-gray-500 hover:text-gray-700"
+            className="text-gray-500 hover:text-blue-500"
           >
             ingresar
           </Link>
-          <Link
-            href="/shoppingCart"
-            className="text-gray-500 hover:text-gray-700"
-          >
-            carrito compras
+          <Link href="/shoppingCart" className="">
+            <BsCart4 className="h-7 w-7 text-blue-400 hover:text-blue-500 bg-blue" />
           </Link>
         </div>
       </div>
