@@ -22,6 +22,7 @@ const CartItem = ({
 
 function ShoppingCart() {
   const { cartItems, removeFromCart, total } = useContext(CartContext);
+  console.log("Productos en el carrito:", cartItems);
   return (
     <div className="bg-gray-200 w-3/4 mx-auto my-8 p-4 rounded-lg shadow-lg">
       <div className="mt-2">

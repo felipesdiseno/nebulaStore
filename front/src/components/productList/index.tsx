@@ -1,7 +1,7 @@
 "use client";
 
 import Card from "../card";
-import IProductsList from "@/interfaces/IProductsProps";
+import IProductsList from "@/interfaces/IProductsList";
 import { IProduct } from "@/interfaces/IProduct";
 
 function ProductList({ products }: IProductsList) {

@@ -43,7 +43,9 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [total, setTotal] = useState(0);
 
   const addToCart = (product: IProduct) => {
+    console.log("agregando producto al carrito", product);
     const updatedCart = addItemToCart(cartItems, product);
+    console.log("Carrito actualizado:", updatedCart);
     setCartItems(updatedCart);
   };
 
