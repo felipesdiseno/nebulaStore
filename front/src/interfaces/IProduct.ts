@@ -6,6 +6,7 @@ interface IProduct {
   image: string;
   categoryId: number;
   stock: number;
+  quantity?: number;
 }
 
 export type { IProduct };

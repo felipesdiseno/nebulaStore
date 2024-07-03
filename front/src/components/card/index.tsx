@@ -1,10 +1,12 @@
 import DetailsCard from "../DetailsCard";
+import { CartContext } from "@/context/cartContext";
 import LazyLoad from "react-lazyload";
 import { IProduct } from "@/interfaces/IProduct";
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 function Card({ product }: { product: IProduct }) {
   const [showDetails, setShowDetails] = useState(false);
+  const { addToCart } = useContext(CartContext);
 
   const showDetailsCard = () => {
     setShowDetails(!showDetails);
@@ -46,6 +48,7 @@ function Card({ product }: { product: IProduct }) {
         </button>
 
         <button
+          onClick={() => addToCart(product)}
           className={`bg-purple-500 text-white font-bold py-2 px-4 rounded hover:bg-purple-600 transition duration-300`}
         >
           <img src="/icons/cart.svg" alt="carrito" className="h-6 w-6" />

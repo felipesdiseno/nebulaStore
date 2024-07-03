@@ -1,4 +1,3 @@
-// "use client";
 import ProductList from "@/components/ProductList";
 import { IProduct } from "@/interfaces/IProduct";
 async function fetchProducts(): Promise<IProduct[]> {

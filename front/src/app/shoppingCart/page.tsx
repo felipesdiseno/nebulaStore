@@ -1,10 +1,30 @@
 "use client";
+import { useContext } from "react";
+import { CartContext } from "../../context/cartContext";
+import { IProduct } from "../../interfaces/IProduct";
+
+const CartItem = ({
+  product,
+  remove,
+}: {
+  product: IProduct;
+  remove: () => void;
+}) => (
+  <div className="flex justify-between items-center p-4">
+    <div>{product.name}</div>
+    <div>{product.quantity}</div>
+    <div>{product.price}</div>
+    <button onClick={remove} className="bg-red-500 text-white p-2 rounded">
+      X
+    </button>
+  </div>
+);
 
 function ShoppingCart() {
-  const products: any = [];
+  const { cartItems, removeFromCart, total } = useContext(CartContext);
   return (
     <div className="bg-gray-200 w-3/4 mx-auto my-8 p-4 rounded-lg shadow-lg">
-      <div className=" mt-2 ">
+      <div className="mt-2">
         <div className="flex flex-row justify-between text-gray-600 space-x-48 text-4xl items-center p-4">
           <div>
             <span>Producto</span>
@@ -15,20 +35,32 @@ function ShoppingCart() {
           <div>
             <span>Precio</span>
           </div>
-
           <div>
             <span>Eliminar</span>
           </div>
         </div>
-        {!products.current ? (
-          <div>No hay productos</div>
+        {cartItems.length > 0 ? (
+          cartItems.map((product) => (
+            <CartItem
+              key={product.id}
+              product={product}
+              remove={() => removeFromCart(product.id)}
+            />
+          ))
         ) : (
-          <div>Aqui van los productos</div>
+          <div>El carrito está vacío</div>
         )}
       </div>
-      <span className="text-3xl " style={{ paddingLeft: "650px" }}>
-        TOTAL:
-      </span>
+      {total > 0 && (
+        <div className="text-3xl text-right p-4">
+          <span className="text-3xl" style={{ paddingLeft: "650px" }}>
+            TOTAL: ${total}
+          </span>
+          <button className="bg-green-500 text-white p-4 rounded ml-4">
+            COMPRAR
+          </button>
+        </div>
+      )}
     </div>
   );
 }

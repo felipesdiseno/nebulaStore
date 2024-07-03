@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import LandingPageComponent from "./landingPage/page";
-
+import Image from "next/image";
 function LandingPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [
@@ -45,7 +45,7 @@ function LandingPage() {
               transform: `translateX(${100 * (index - currentSlide)}%)`,
             }}
           >
-            <img
+            <Image
               src={slide}
               className="block w-full h-full object-cover"
               alt={`Slide ${index + 1}`}
