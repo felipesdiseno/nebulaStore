@@ -1,7 +1,7 @@
-import DetailsCard from "../DetailsCard";
 import { CartContext } from "@/context/cartContext";
-import LazyLoad from "react-lazyload";
+import DetailsCard from "../DetailsCard";
 import { IProduct } from "@/interfaces/IProduct";
+import LazyLoad from "react-lazyload";
 import { useState, useContext } from "react";
 
 function Card({ product }: { product: IProduct }) {
@@ -48,7 +48,9 @@ function Card({ product }: { product: IProduct }) {
         </button>
 
         <button
-          onClick={() => addToCart(product)}
+          onClick={() => {
+            addToCart(product.id);
+          }}
           className={`bg-purple-500 text-white font-bold py-2 px-4 rounded hover:bg-purple-600 transition duration-300`}
         >
           <img src="/icons/cart.svg" alt="carrito" className="h-6 w-6" />

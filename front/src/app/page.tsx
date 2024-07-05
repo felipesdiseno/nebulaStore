@@ -45,7 +45,7 @@ function LandingPage() {
               transform: `translateX(${100 * (index - currentSlide)}%)`,
             }}
           >
-            <Image
+            <img
               src={slide}
               className="block w-full h-full object-cover"
               alt={`Slide ${index + 1}`}

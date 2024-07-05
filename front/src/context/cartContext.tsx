@@ -1,7 +1,7 @@
 "use client";
 import { IProduct } from "../interfaces/IProduct";
-import { useEffect, createContext, useState, ReactNode } from "react";
 import ICartContextType from "../interfaces/ICartContextType";
+import { useEffect, createContext, useState, ReactNode } from "react";
 
 export const CartContext = createContext<ICartContextType>({
   cartItems: [],
@@ -10,48 +10,68 @@ export const CartContext = createContext<ICartContextType>({
   total: 0,
 });
 
+const fetchProductById = async (
+  productId: number
+): Promise<IProduct | null> => {
+  try {
+    const response = await fetch(`http://localhost:5000/products/${productId}`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch product");
+    }
+    const product: IProduct = await response.json();
+    return product;
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    return null;
+  }
+};
+
 const addItemToCart = (
   cartItems: IProduct[],
   product: IProduct
 ): IProduct[] => {
   const existingProduct = cartItems.find((item) => item.id === product.id);
   if (existingProduct) {
-    return cartItems.map((item) =>
-      item.id === product.id
-        ? { ...item, quantity: (item.quantity ?? 0) + 1 }
-        : item
-    );
+    return cartItems;
   }
-  return [...cartItems, { ...product, quantity: 1 }];
+  return [...cartItems, product];
 };
 
 const removeItemFromCart = (
   cartItems: IProduct[],
   productId: number
 ): IProduct[] => {
-  return cartItems
-    .map((item) =>
-      item.id === productId
-        ? { ...item, quantity: (item.quantity ?? 0) - 1 }
-        : item
-    )
-    .filter((item) => (item.quantity ?? 0) > 0);
+  return cartItems.filter((item) => item.id !== productId);
 };
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<IProduct[]>([]);
   const [total, setTotal] = useState(0);
 
-  const addToCart = (product: IProduct) => {
-    console.log("agregando producto al carrito", product);
+  const addToCart = async (productId: number) => {
+    const product = await fetchProductById(productId);
+    if (!product) return;
+
     const updatedCart = addItemToCart(cartItems, product);
-    console.log("Carrito actualizado:", updatedCart);
     setCartItems(updatedCart);
+
+    const newTotal = updatedCart.reduce(
+      (acc: number, item: IProduct) => acc + item.price,
+      0
+    );
+    setTotal(newTotal);
+
+    localStorage.setItem("cartItems", JSON.stringify(updatedCart));
   };
 
   const removeFromCart = (productId: number) => {
     const updatedCart = removeItemFromCart(cartItems, productId);
     setCartItems(updatedCart);
+
+    const newTotal = updatedCart.reduce((acc, item) => acc + item.price, 0);
+    setTotal(newTotal);
+
+    localStorage.setItem("cartItems", JSON.stringify(updatedCart));
   };
 
   useEffect(() => {
@@ -59,15 +79,13 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       localStorage.getItem("cartItems") || "[]"
     );
     setCartItems(savedCartItems);
-  }, []);
 
-  useEffect(() => {
-    const total = cartItems.reduce(
-      (acc, item) => acc + item.price * (item.quantity ?? 1),
+    const savedTotal = savedCartItems.reduce(
+      (acc: number, item: IProduct) => acc + item.price,
       0
     );
-    setTotal(total);
-  }, [cartItems]);
+    setTotal(savedTotal);
+  }, []);
 
   return (
     <CartContext.Provider

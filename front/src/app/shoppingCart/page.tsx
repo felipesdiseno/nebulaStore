@@ -1,7 +1,7 @@
 "use client";
 import { useContext } from "react";
-import { CartContext } from "../../context/cartContext";
 import { IProduct } from "../../interfaces/IProduct";
+import { CartContext } from "../../context/cartContext";
 
 const CartItem = ({
   product,
@@ -12,7 +12,7 @@ const CartItem = ({
 }) => (
   <div className="flex justify-between items-center p-4">
     <div>{product.name}</div>
-    <div>{product.quantity}</div>
+
     <div>{product.price}</div>
     <button onClick={remove} className="bg-red-500 text-white p-2 rounded">
       X
@@ -22,7 +22,7 @@ const CartItem = ({
 
 function ShoppingCart() {
   const { cartItems, removeFromCart, total } = useContext(CartContext);
-  console.log("Productos en el carrito:", cartItems);
+
   return (
     <div className="bg-gray-200 w-3/4 mx-auto my-8 p-4 rounded-lg shadow-lg">
       <div className="mt-2">
@@ -30,9 +30,7 @@ function ShoppingCart() {
           <div>
             <span>Producto</span>
           </div>
-          <div>
-            <span>Cantidad</span>
-          </div>
+
           <div>
             <span>Precio</span>
           </div>
@@ -41,13 +39,16 @@ function ShoppingCart() {
           </div>
         </div>
         {cartItems.length > 0 ? (
-          cartItems.map((product) => (
-            <CartItem
-              key={product.id}
-              product={product}
-              remove={() => removeFromCart(product.id)}
-            />
-          ))
+          cartItems.map((product, index) => {
+            console.log(`Producto ${index + 1}:`, product);
+            return (
+              <CartItem
+                key={product.id}
+                product={product}
+                remove={() => removeFromCart(product.id)}
+              />
+            );
+          })
         ) : (
           <div>El carrito está vacío</div>
         )}

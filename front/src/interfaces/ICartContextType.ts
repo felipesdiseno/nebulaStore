@@ -2,7 +2,7 @@ import { IProduct } from "./IProduct";
 
 interface ICartContextType {
   cartItems: IProduct[];
-  addToCart: (product: IProduct) => void;
+  addToCart: (productId: number) => void;
   removeFromCart: (productId: number) => void;
   total: number;
 }
