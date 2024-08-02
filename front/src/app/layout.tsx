@@ -4,7 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/footer";
 import { CartProvider } from "@/context/cartContext";
-
+import { AuthProvider } from "@/context/authContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -24,11 +24,13 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <div className="flex flex-col min-h-screen">
-          <CartProvider>
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </CartProvider>
+          <AuthProvider>
+            <CartProvider>
+              <Navbar />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </CartProvider>
+          </AuthProvider>
         </div>
       </body>
     </html>

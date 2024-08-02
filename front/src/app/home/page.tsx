@@ -8,7 +8,7 @@ async function fetchProducts(): Promise<IProduct[]> {
 async function Home() {
   const product = await fetchProducts();
   return (
-    <div className="m-4 p-6 bg-gray-400 rounded-md max-w-4xl mx-auto">
+    <div className="m-4 p-6 bg-gray-400 rounded-lg max-w-4xl mx-auto shadow-md">
       <h1 className="text-3xl text-white">Nuestra selección para ti</h1>
       <div className="gird grid-cols-2 gap-4 auto-rows-auto ">
         <ProductList products={product} />

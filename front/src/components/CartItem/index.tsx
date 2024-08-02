@@ -1,4 +1,4 @@
-import IProductCardItem from '@/interfaces/IProductCardItem';
+import IProductCardItem from "@/interfaces/IProductCardItem";
 
 function CartItem({ product, remove }: IProductCardItem) {
   return (
@@ -13,10 +13,7 @@ function CartItem({ product, remove }: IProductCardItem) {
         <span className="block text-gray-600">${product.price}</span>
       </div>
       <div>
-        <button
-          onClick={remove}
-          className="text-red-500 hover:text-red-700"
-        >
+        <button onClick={remove} className="text-red-500 hover:text-red-700">
           X
         </button>
       </div>

@@ -1,7 +1,8 @@
 "use client";
-import { useContext } from "react";
-import { CartContext } from "../../context/cartContext";
+
 import CartItem from "../CartItem";
+import { CartContext } from "../../context/cartContext";
+import { useContext } from "react";
 
 function ShoppingCart() {
   const { cartItems, removeFromCart, total } = useContext(CartContext);
@@ -15,7 +16,9 @@ function ShoppingCart() {
           </div>
         ))
       ) : (
-        <div>Tu carrito está vacio</div>
+        <div className="text-center text-3xl text-white">
+          Tu carrito está vacio
+        </div>
       )}
       {total < 0 && (
         <div>
