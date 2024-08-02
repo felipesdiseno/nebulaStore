@@ -13,20 +13,17 @@ function Card({ product }: { product: IProduct }) {
   };
 
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-xs mx-auto my-4 m-4 p-4 relative">
+    <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-xs mx-auto  m-1 p-4 relative shadow-md">
       <LazyLoad height={200} once>
-        <div
-          className="mb-6 rounded-sm"
-          style={{ height: "200px", width: "230px" }}
-        >
+        <div className="mb-2 rounded-sm h-56 w-56">
           <img
             src={product.image}
             alt={product.name}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover rounded-lg"
           />
         </div>
       </LazyLoad>
-      <div className="mb-4">
+      <div className="mb-2">
         <h2 className="text-xl font-semibold">{product.name}</h2>
         <h3 className="text-gray-600">Stock: {product.stock} und.</h3>
         <h3 className="text-gray-600">Precio: ${product.price}</h3>
