@@ -1,6 +1,4 @@
-import IUser from "./IUsers";
-
-export interface IRegisterUser extends IUser {
+interface IRegisterFormData {
   first_name: string;
   last_name: string;
   email: string;
@@ -8,3 +6,5 @@ export interface IRegisterUser extends IUser {
   address: string;
   phone: string;
 }
+
+export default IRegisterFormData;

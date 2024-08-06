@@ -3,7 +3,7 @@ import IDataTestimony from "@/interfaces/IDataTestimony";
 const dataTestimony: IDataTestimony[] = [
   {
     id: 1,
-    name: "Juana Roa",
+    name: "Juana Martinez",
     img: "/testimony/t1.jpg",
     testimony: "La atención es muy buena.",
   },

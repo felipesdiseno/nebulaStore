@@ -21,17 +21,18 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/icons/nebula.png" />
+        <title>Nebula store</title>
       </head>
       <body className={inter.className}>
-        <div className="flex flex-col min-h-screen">
-          <AuthProvider>
-            <CartProvider>
+        <AuthProvider>
+          <CartProvider>
+            <div className="flex flex-col min-h-screen">
               <Navbar />
               <main className="flex-1">{children}</main>
               <Footer />
-            </CartProvider>
-          </AuthProvider>
-        </div>
+            </div>
+          </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );

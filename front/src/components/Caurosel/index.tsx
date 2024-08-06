@@ -53,13 +53,13 @@ function Caurosel() {
         ))}
       </div>
 
-      <div className="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3">
+      <div className="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-6">
         {slides.map((_, index) => (
           <button
             key={index}
             type="button"
-            className={`w-3 h-3 rounded-full ${
-              index === currentSlide ? "bg-blue-500" : "bg-gray-400"
+            className={`w-1 h-1 rounded-full  ${
+              index === currentSlide ? "bg-gray-600" : "bg-gray-400"
             }`}
             onClick={() => setCurrentSlide(index)}
             aria-label={`Slide ${index + 1}`}
@@ -75,7 +75,7 @@ function Caurosel() {
       >
         <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50">
           <svg
-            className="w-4 h-4 text-white"
+            className="w-4 h-4 text-white opacity-50"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -100,7 +100,7 @@ function Caurosel() {
       >
         <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50">
           <svg
-            className="w-4 h-4 text-white"
+            className="w-4 h-4 text-white opacity-50"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

@@ -30,10 +30,13 @@ export default function OpinionComponent() {
   };
 
   return (
-    <div className="w-2/4  mt-2 m-4 ">
+    <div className="w-2/4   m-2 ">
       <Slider {...settings} className="space-x-6">
         {dataTestimony.map((d) => (
-          <div key={d.id} className="bg-none text-black rounded-lg p-2">
+          <div
+            key={d.id}
+            className="bg-none text-black rounded-lg p-2 shadow-md"
+          >
             <div className="rounded-t-xl bg-blue-500 flex justify-center items-center pt-2 pb-2 ">
               <img src={d.img} alt="" className="w-44 h-44 rounded-full" />
             </div>

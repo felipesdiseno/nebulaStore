@@ -1,55 +1,42 @@
 "use client";
-
-import { useState, useEffect } from "react";
+import React from "react";
 import { useAuth } from "@/context/authContext";
-import IregisterUser from "../../interfaces/IRegister";
 
-export default function Profile() {
-  const { userId } = useAuth();
-  const [profileData, setProfileData] = useState<IregisterUser | null>(null);
-  const [loading, setLoading] = useState(true);
+const ProfilePage = () => {
+  const { user } = useAuth();
 
-  useEffect(() => {
-    if (userId) {
-      fetch(`http://localhost:5000/users/${userId}`)
-        .then((response) => response.json())
-        .then((data: IregisterUser) => {
-          setProfileData(data);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error("Error fetching profile data:", error);
-          setLoading(false);
-        });
-    }
-  }, [userId]);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (!profileData) {
-    return <p>Error loading profile data.</p>;
+  if (!user) {
+    return <p>No estás autenticado</p>;
   }
 
   return (
-    <div className="max-w-screen-md mx-auto my-10">
-      <h1 className="text-3xl font-bold mb-6">Mi Perfil</h1>
-      <div className="bg-white shadow-md rounded-lg p-6">
-        <p>
-          <strong>Nombre:</strong> {profileData.first_name}{" "}
-          {profileData.last_name}
+    <div className="bg-gray-400 max-w-md mx-auto p-6 mt-10 rounded-xl shadow-lg">
+      <div className="flex justify-center">
+        <h1 className="text-3xl font-bold text-white mb-6">
+          Perfil de Usuario
+        </h1>
+      </div>
+      <div className="bg-white p-6 rounded-xl shadow-md">
+        <p className="text-lg">
+          <strong>Nombre:</strong> {user.name}
         </p>
-        <p>
-          <strong>Email:</strong> {profileData.email}
+        <p className="text-lg">
+          <strong>Email:</strong> {user.email}
         </p>
-        <p>
-          <strong>Dirección:</strong> {profileData.address}
+        <p className="text-lg">
+          <strong>Dirección:</strong> {user.address}
         </p>
-        <p>
-          <strong>Teléfono:</strong> {profileData.phone}
+        <p className="text-lg">
+          <strong>Teléfono:</strong> {user.phone}
         </p>
+        <div className="flex justify-center">
+          <button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+            Editar Perfil
+          </button>
+        </div>
       </div>
     </div>
   );
-}
+};
+
+export default ProfilePage;

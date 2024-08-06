@@ -1,9 +1,11 @@
 "use client";
 import { useState, FormEvent } from "react";
-import IRegisterUser from "../../interfaces/IRegister";
+import { IRegisterUser } from "../../interfaces/IRegister";
+import { useAuth } from "@/context/authContext";
+import IRegisterFormData from "@/interfaces/IRegisterFormData";
 
 function Register() {
-  const [formData, setFormData] = useState<IRegisterUser>({
+  const [formData, setFormData] = useState<IRegisterFormData>({
     first_name: "",
     last_name: "",
     email: "",
@@ -11,18 +13,19 @@ function Register() {
     address: "",
     phone: "",
   });
-  const [errors, setErrors] = useState({} as { [key: string]: string });
 
-  const handleSubmit = async (e: FormEvent) => {
+  const { login } = useAuth();
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // Combina los nombres
     const fullName = `${formData.first_name} ${formData.last_name}`;
+
+    // Crea un nuevo objeto con la información que el backend espera
     const dataToSend = {
-      name: fullName,
-      email: formData.email,
-      password: formData.password,
-      address: formData.address,
-      phone: formData.phone,
+      ...formData,
+      name: fullName, // Combina first_name y last_name en name
     };
 
     try {
@@ -31,29 +34,20 @@ function Register() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(dataToSend),
+        body: JSON.stringify(dataToSend), // Envía dataToSend
       });
 
       if (response.ok) {
-        alert(`Bienvenido: ${formData.first_name}`);
-        // Limpiar el formulario estableciendo el estado al valor inicial
-        setFormData({
-          first_name: "",
-          last_name: "",
-          email: "",
-          password: "",
-          address: "",
-          phone: "",
-        });
-        setErrors({}); // Limpiar errores si hay
+        const data = await response.json();
+        login(data); // Asume que el backend devuelve el objeto de usuario completo
+        alert(`Registro exitoso con: ${formData.email}`);
       } else {
         const errorData = await response.json();
-        setErrors(errorData.errors);
-        alert("Error en el registro. Intenta nuevamente.");
+        alert(`Error: ${errorData.message}`);
       }
     } catch (error) {
-      console.error("Error:", error);
-      alert("Error en el registro. Intenta nuevamente.");
+      console.error("Error durante el registro:", error);
+      alert("Error durante el registro. Por favor, intenta nuevamente.");
     }
   };
 

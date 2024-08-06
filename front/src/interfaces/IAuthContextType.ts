@@ -1,7 +1,8 @@
+import IUser from "@/interfaces/IUsers";
 interface AuthContextType {
-  isAuthenticated: boolean;
-  userId: string | null;
-  login: (id: string) => void;
+  user: IUser | null;
+
+  login: (userData: IUser) => void;
   logout: () => void;
 }
 

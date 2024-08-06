@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, FormEvent } from "react";
 import ILoginUser from "../../interfaces/ILogin";
+import { useAuth } from "@/context/authContext";
 
 function Login() {
   const [formData, setFormData] = useState<ILoginUser>({
@@ -8,7 +9,9 @@ function Login() {
     password: "",
   });
 
-  const handleSubmit = async (e: FormEvent) => {
+  const { login } = useAuth();
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
@@ -22,17 +25,17 @@ function Login() {
 
       if (response.ok) {
         const data = await response.json();
+        login(data); // Asume que el backend devuelve el objeto de usuario completo
         alert(`Inicio de sesión exitoso con: ${formData.email}`);
-        console.log(data);
-      } else if (response.status === 404) {
-        alert("El usuario no está registrado. Por favor, regístrate primero.");
       } else {
         const errorData = await response.json();
-        alert(`Usuario o contraseña incorrectos.`);
+        alert(`Error: ${errorData.message}`);
       }
     } catch (error) {
-      console.error("Error en la solicitud:", error);
-      alert("Error en la solicitud. Por favor, intenta nuevamente.");
+      console.error("Error durante el inicio de sesión:", error);
+      alert(
+        "Error durante el inicio de sesión. Por favor, intenta nuevamente."
+      );
     }
   };
 
@@ -40,7 +43,6 @@ function Login() {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
-
   return (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto">
       <h1 className="pb-2">Iniciar sesión</h1>
