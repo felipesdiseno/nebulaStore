@@ -1,8 +1,9 @@
 "use client";
-import React, { useState, FormEvent } from "react";
+import React, { useState, FormEvent, useEffect } from "react";
 import ILoginUser from "../../interfaces/ILogin";
 import { useAuth } from "@/context/authContext";
-
+import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 function Login() {
   const [formData, setFormData] = useState<ILoginUser>({
     email: "",
@@ -10,6 +11,7 @@ function Login() {
   });
 
   const { login } = useAuth();
+  const router = useRouter();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,11 +27,23 @@ function Login() {
 
       if (response.ok) {
         const data = await response.json();
-        login(data); // Asume que el backend devuelve el objeto de usuario completo
-        alert(`Inicio de sesión exitoso con: ${formData.email}`);
+        login(data);
+
+        Swal.fire({
+          title: "Bienvenido!",
+          text: "Inicio de sesión exitoso con: " + formData.email,
+          icon: "success",
+        });
+
+        router.push("/home");
       } else {
         const errorData = await response.json();
-        alert(`Error: ${errorData.message}`);
+
+        Swal.fire({
+          title: "Oops!",
+          text: "No se pudo iniciar sesion  usuario o contraseña incorrecta",
+          icon: "warning",
+        });
       }
     } catch (error) {
       console.error("Error durante el inicio de sesión:", error);
@@ -43,9 +57,10 @@ function Login() {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
   return (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-      <h1 className="pb-2">Iniciar sesión</h1>
+      <h1 className="text-3xl pb-2 text-gray-500">Iniciar sesión</h1>
       <div className="relative z-0 w-full mb-5 group">
         <input
           type="email"
@@ -85,7 +100,7 @@ function Login() {
 
       <button
         type="submit"
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        className="text-white bg-blue-700 hover:bg-blue-800  focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 "
       >
         Iniciar sesión
       </button>

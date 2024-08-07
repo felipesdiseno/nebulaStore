@@ -3,6 +3,7 @@ import { useState, FormEvent } from "react";
 import { IRegisterUser } from "../../interfaces/IRegister";
 import { useAuth } from "@/context/authContext";
 import IRegisterFormData from "@/interfaces/IRegisterFormData";
+import Swal from "sweetalert2";
 
 function Register() {
   const [formData, setFormData] = useState<IRegisterFormData>({
@@ -19,13 +20,11 @@ function Register() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Combina los nombres
     const fullName = `${formData.first_name} ${formData.last_name}`;
 
-    // Crea un nuevo objeto con la información que el backend espera
     const dataToSend = {
       ...formData,
-      name: fullName, // Combina first_name y last_name en name
+      name: fullName,
     };
 
     try {
@@ -34,16 +33,26 @@ function Register() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(dataToSend), // Envía dataToSend
+        body: JSON.stringify(dataToSend),
       });
 
       if (response.ok) {
         const data = await response.json();
-        login(data); // Asume que el backend devuelve el objeto de usuario completo
-        alert(`Registro exitoso con: ${formData.email}`);
+        login(data);
+        // alert(`Registro exitoso con: ${formData.email}`);
+        Swal.fire({
+          title: "Bienvenido!",
+          text: "Registro exitoso con:" + formData.email,
+          icon: "success",
+        });
       } else {
         const errorData = await response.json();
-        alert(`Error: ${errorData.message}`);
+        // alert(`Error45: ${errorData.message}`);
+        Swal.fire({
+          title: "Oops!",
+          text: "El usuario ya existe",
+          icon: "warning",
+        });
       }
     } catch (error) {
       console.error("Error durante el registro:", error);
@@ -82,7 +91,7 @@ function Register() {
           type="text"
           name="last_name"
           id="floating_last_name"
-          className="block py-2.5 px-0 w-full text-sm text-gray-600 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-gray-300 dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          className="block py-2.5 px-0 w-full text-sm text-gray-700 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-gray-700 dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=""
           value={formData.last_name}
           onChange={handleChange}

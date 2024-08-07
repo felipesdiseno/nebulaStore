@@ -4,16 +4,27 @@ import { IProduct } from "@/interfaces/IProduct";
 import LazyLoad from "react-lazyload";
 import { useState, useContext } from "react";
 
-function Card({ product }: { product: IProduct }) {
+function Card({
+  product,
+  onAddToCart,
+}: {
+  product: IProduct;
+  onAddToCart: () => void;
+}) {
   const [showDetails, setShowDetails] = useState(false);
+
   const { addToCart } = useContext(CartContext);
 
   const showDetailsCard = () => {
     setShowDetails(!showDetails);
   };
+  const handleAddToCart = () => {
+    addToCart(product.id);
+    onAddToCart();
+  };
 
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-xs mx-auto  m-1 p-4 relative shadow-md">
+    <div className="bg-gray-100 shadow-lg rounded-lg overflow-hidden max-w-xs mx-auto  m-1 p-4 relative shadow-md">
       <LazyLoad height={200} once>
         <div className="mb-2 rounded-sm h-56 w-56">
           <img
@@ -45,9 +56,7 @@ function Card({ product }: { product: IProduct }) {
         </button>
 
         <button
-          onClick={() => {
-            addToCart(product.id);
-          }}
+          onClick={handleAddToCart}
           className={`bg-purple-500 text-white font-bold py-2 px-4 rounded hover:bg-purple-600 transition duration-300`}
         >
           <img src="/icons/cart.svg" alt="carrito" className="h-6 w-6" />

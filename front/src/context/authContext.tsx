@@ -22,7 +22,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         const parsedData = JSON.parse(storedUser);
         console.log("Datos almacenados:", parsedData);
 
-        // Puedes añadir validaciones adicionales aquí si es necesario
         if (
           parsedData &&
           parsedData.user &&

@@ -7,10 +7,11 @@ function Authentication() {
       <div className="flex items-center justify-center w-full max-w-4xl">
         <Register />
         <div
+          className="bg-gray-400 shadow-md"
           style={{
             height: "500px",
             width: "4px",
-            backgroundColor: "#1D4ED8",
+
             borderRadius: "2px",
           }}
         ></div>

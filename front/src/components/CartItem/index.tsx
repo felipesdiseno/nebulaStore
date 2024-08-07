@@ -1,6 +1,8 @@
 import IProductCardItem from "@/interfaces/IProductCardItem";
 
 function CartItem({ product, remove }: IProductCardItem) {
+  console.log("Product:", product);
+  console.log("Remove function:", remove);
   return (
     <div className="flex items-center p-4 border-b border-gray-200">
       <img

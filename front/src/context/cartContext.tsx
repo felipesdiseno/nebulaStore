@@ -3,7 +3,7 @@ import { IProduct } from "../interfaces/IProduct";
 import ICartContextType from "../interfaces/ICartContextType";
 import { useEffect, createContext, useState, ReactNode } from "react";
 
-export const CartContext = createContext<ICartContextType>({
+export const CartContext = createContext<ICartContextType | undefined>({
   cartItems: [],
   addToCart: () => {},
   removeFromCart: () => {},
@@ -37,22 +37,32 @@ const addItemToCart = (
   return [...cartItems, product];
 };
 
-const removeItemFromCart = (
-  cartItems: IProduct[],
-  productId: number
-): IProduct[] => {
-  return cartItems.filter((item) => item.id !== productId);
-};
-
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<IProduct[]>([]);
   const [total, setTotal] = useState(0);
 
   const addToCart = async (productId: number) => {
-    const product = await fetchProductById(productId);
-    if (!product) return;
+    try {
+      const product = await fetchProductById(productId);
+      if (!product) return;
 
-    const updatedCart = addItemToCart(cartItems, product);
+      const updatedCart = addItemToCart(cartItems, product);
+      setCartItems(updatedCart);
+
+      const newTotal = updatedCart.reduce(
+        (acc: number, item: IProduct) => acc + item.price,
+        0
+      );
+      setTotal(newTotal);
+
+      localStorage.setItem("cartItems", JSON.stringify(updatedCart));
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+    }
+  };
+
+  const removeFromCart = (productId: number) => {
+    const updatedCart = cartItems.filter((item) => item.id !== productId);
     setCartItems(updatedCart);
 
     const newTotal = updatedCart.reduce(
@@ -64,27 +74,18 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("cartItems", JSON.stringify(updatedCart));
   };
 
-  const removeFromCart = (productId: number) => {
-    const updatedCart = removeItemFromCart(cartItems, productId);
-    setCartItems(updatedCart);
-
-    const newTotal = updatedCart.reduce((acc, item) => acc + item.price, 0);
-    setTotal(newTotal);
-
-    localStorage.setItem("cartItems", JSON.stringify(updatedCart));
-  };
-
   useEffect(() => {
     const savedCartItems = JSON.parse(
       localStorage.getItem("cartItems") || "[]"
     );
-    setCartItems(savedCartItems);
-
-    const savedTotal = savedCartItems.reduce(
-      (acc: number, item: IProduct) => acc + item.price,
-      0
-    );
-    setTotal(savedTotal);
+    if (Array.isArray(savedCartItems) && savedCartItems.length > 0) {
+      setCartItems(savedCartItems);
+      const savedTotal = savedCartItems.reduce(
+        (acc: number, item: IProduct) => acc + item.price,
+        0
+      );
+      setTotal(savedTotal);
+    }
   }, []);
 
   return (

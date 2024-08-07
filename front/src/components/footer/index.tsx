@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <div className="bg-gray-200 border-gray-500 border-3px flex justify-center space-x-10 p-4">
       <p> © Nebulosa Store. Todos los Derechos reservados 2024</p>
-      <p>Desarrollado por felipesdiseno</p>
+      <p>Desarrollado por Felipe Sanchez</p>
       <div>
         <h3>sigueme en mis redes: </h3>
         <div className="flex justify-center space-x-5 p-2">
