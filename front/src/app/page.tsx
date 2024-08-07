@@ -6,7 +6,10 @@ function LandingPage() {
     <div className="flex flex-col ">
       <Caurosel />
 
-      <div className="mb-6 mt-1p-2 flex justify-center items-center space-x-4">
+      <div className="mb-6 mt-4 p-4 flex flex-col items-center space-y-4">
+        <p className="text-xl font-semibold text-gray-600">
+          Opiniones de nuestros clientes:
+        </p>
         <OpinionComponent />
       </div>
     </div>
