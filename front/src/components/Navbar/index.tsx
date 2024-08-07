@@ -45,40 +45,27 @@ export default function Navbar() {
         </Link>
 
         <div className="flex items-center space-x-4">
-          {user ? (
-            <Link
-              href="/home"
-              className="p-1 text-gray-500 rounded-md text-2xl hover:text-blue-500 hover:bg-gray-300 transition duration-300"
-            >
-              Catalogo
-            </Link>
-          ) : (
-            <Link
-              href="/"
-              className="p-1 text-gray-500 rounded-md text-2xl hover:text-blue-500 hover:bg-gray-300 transition duration-300"
-            >
-              Home
-            </Link>
-          )}
+          <Link
+            href="/"
+            className="p-1 text-gray-500 rounded-md text-2xl hover:text-blue-500 hover:bg-gray-300 transition duration-300"
+          >
+            Home
+          </Link>
           <Link
             href="/about"
             className="p-1 text-gray-500 rounded-md text-2xl hover:text-blue-500 hover:bg-gray-300 transition duration-300"
           >
             Acerca de
           </Link>
-          <Link
-            href="/authentication"
-            className="p-1 text-gray-500 rounded-md text-2xl hover:text-blue-500 hover:bg-gray-300 transition duration-300"
-          >
-            Ingresar
-          </Link>
-          <div className="border-2 border-gray-300 p-2 rounded-full flex flex-row items-center">
+          {user && (
             <Link
-              href={user ? "/shoppingCart" : "#"}
-              className={`${!user ? "pointer-events-none opacity-50" : ""}`}
+              href="/shoppingCart"
+              className="p-1 text-gray-500 rounded-md text-2xl hover:text-blue-500 hover:bg-gray-300 transition duration-300"
             >
               <BsCart4 className="h-10 w-10 rounded-full text-blue-400 p-1 hover:text-blue-500 hover:bg-gray-300 transition duration-300" />
             </Link>
+          )}
+          <div className="  p-2 rounded-full flex flex-row items-center">
             <div ref={menuRef} className="relative">
               <button onClick={toggleMenu} className="focus:outline-none">
                 <FaUserCircle
@@ -88,7 +75,7 @@ export default function Navbar() {
                 />
               </button>
               {isMenuOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 shadow-lg rounded-lg py-1">
+                <div className="absolute right-0 mt-2 w-48 bg-white  shadow-lg rounded-lg py-1">
                   {user ? (
                     <>
                       <Link
