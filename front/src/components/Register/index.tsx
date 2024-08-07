@@ -39,7 +39,7 @@ function Register() {
       if (response.ok) {
         const data = await response.json();
         login(data);
-        // alert(`Registro exitoso con: ${formData.email}`);
+
         Swal.fire({
           title: "Bienvenido!",
           text: "Registro exitoso con:" + formData.email,
@@ -47,7 +47,7 @@ function Register() {
         });
       } else {
         const errorData = await response.json();
-        // alert(`Error45: ${errorData.message}`);
+
         Swal.fire({
           title: "Oops!",
           text: "El usuario ya existe",

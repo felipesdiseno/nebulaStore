@@ -30,12 +30,9 @@ function Login() {
       if (response.ok) {
         const data = await response.json();
 
-        // Aquí asumimos que el backend devuelve un objeto con los datos del usuario o un token
-        // Ajusta esto según la estructura de respuesta de tu backend
         if (data.user) {
-          login(data.user); // Si el backend devuelve el objeto del usuario
+          login(data.user);
         } else if (data.token) {
-          // Si el backend devuelve un token, podrías necesitar decodificarlo o guardarlo en el contexto
           login({ token: data.token });
         }
 

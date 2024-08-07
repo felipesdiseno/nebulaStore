@@ -8,8 +8,7 @@ import {
 } from "react";
 import AuthContextType from "@/interfaces/IAuthContextType";
 import { IRegisterUser } from "@/interfaces/IRegister";
-import IUser from "@/interfaces/IUsers";
-import ILoginUser from "@/interfaces/ILogin";
+
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
