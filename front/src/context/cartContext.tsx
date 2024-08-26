@@ -57,7 +57,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
       localStorage.setItem("cartItems", JSON.stringify(updatedCart));
     } catch (error) {
-      console.error("Error adding product to cart:", error);
+      console.error("Error al agregar producto:", error);
     }
   };
 

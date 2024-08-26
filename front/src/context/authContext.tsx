@@ -7,50 +7,80 @@ import {
   useEffect,
 } from "react";
 import AuthContextType from "@/interfaces/IAuthContextType";
-import { IRegisterUser } from "@/interfaces/IRegister";
+import IUser from "@/interfaces/IUser";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<IRegisterUser | null>(null);
+  const [user, setUser] = useState<IUser | null>(null);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      try {
-        const parsedData = JSON.parse(storedUser);
-        console.log("Datos almacenados:", parsedData);
-
-        if (
-          parsedData &&
-          parsedData.user &&
-          parsedData.user.id &&
-          parsedData.user.email
-        ) {
-          setUser(parsedData.user);
+    try {
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        const parsedData: IUser = JSON.parse(storedUser);
+        if (parsedData && parsedData.id && parsedData.email) {
+          setUser(parsedData);
         } else {
           console.warn(
             "El usuario almacenado no tiene la estructura correcta."
           );
         }
-      } catch (error) {
-        console.error("Error al parsear el usuario almacenado:", error);
       }
+    } catch (error) {
+      console.error("Error al parsear el usuario almacenado:", error);
+      localStorage.removeItem("user");
     }
   }, []);
 
-  const login = (userData: IRegisterUser) => {
-    setUser(userData);
-    localStorage.setItem("user", JSON.stringify(userData));
+  const login = async (data: {
+    email: string;
+    password: string;
+  }): Promise<string> => {
+    try {
+      const { email, password } = data;
+      console.log("Datos enviados:", { email, password });
+      const response = await fetch("http://localhost:5000/users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: data.email, password: data.password }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Email o contraseña incorrectos.");
+      }
+
+      const { user, token }: { user: IUser; token: string } =
+        await response.json();
+      console.log("Usuario autenticado:", user);
+
+      setUser(user);
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("token", token);
+
+      return "Inicio de sesión exitoso.";
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error("Error durante el inicio de sesión:", error.message);
+        return (
+          error.message || "Error al iniciar sesión. Verifica tus credenciales."
+        );
+      } else {
+        console.error("Error desconocido durante el inicio de sesión:", error);
+        return "Error desconocido durante el inicio de sesión.";
+      }
+    }
   };
 
   const logout = () => {
     setUser(null);
     localStorage.removeItem("user");
+    localStorage.removeItem("token");
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, setUser, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
@@ -61,5 +91,6 @@ export const useAuth = (): AuthContextType => {
   if (context === undefined) {
     throw new Error("useAuth must be used within an AuthProvider");
   }
+
   return context;
 };
