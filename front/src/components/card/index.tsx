@@ -26,7 +26,7 @@ function Card({
   return (
     <div className="bg-gray-100 shadow-lg rounded-lg overflow-hidden max-w-xs mx-auto  m-1 p-4 relative shadow-md">
       <LazyLoad height={200} once>
-        <div className="mb-2 rounded-sm h-56 w-56">
+        <div className="mb-2 rounded-md h-56 w-56 shadow-md">
           <img
             src={product.image}
             alt={product.name}

@@ -1,4 +1,4 @@
-import IUser from "./IUsers";
+import IUser from "./IUser";
 
 export interface IRegisterUser extends IUser {
   first_name: string;

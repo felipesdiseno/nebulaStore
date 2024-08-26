@@ -28,7 +28,7 @@ function Home() {
 
   return (
     <div className="p-4 m-2">
-      <div className="m-4 p-6 bg-gray-200 rounded-xl max-w-4xl mx-auto shadow-md ">
+      <div className="m-4 p-6 bg-gray-200 rounded-xl max-w-4xl mx-auto shadow-xl ">
         <h1 className="text-3xl text-gray-500 font-bold mb-4">
           Nuestra selección para ti
         </h1>

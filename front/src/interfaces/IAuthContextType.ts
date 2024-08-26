@@ -1,8 +1,8 @@
-import IUser from "@/interfaces/IUsers";
+import IUser from "@/interfaces/IUser";
 interface AuthContextType {
   user: IUser | null;
-
-  login: (userData: IUser) => void;
+  setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
+  login: (data: { email: string; password: string }) => Promise<string>;
   logout: () => void;
 }
 

@@ -33,12 +33,12 @@ export default function Navbar() {
     <nav className="bg-white border-b border-gray-200 shadow-md sticky top-0 z-10">
       <div className="flex items-center justify-between px-4 py-2">
         <Link href="/">
-          <div className="flex items-center p-1 rounded-md space-x-4 text-gray-500 hover:cursor-pointer hover:text-white hover:bg-gray-300 transition duration-300">
+          <div className="flex items-center p-1 rounded-md space-x-4 text-gray-500 hover:cursor-pointer  hover:text-gray-300 transition duration-300">
             <Image
-              src="/icons/nebula.png"
+              src="/icons/nebula3.png"
               alt="nebula"
-              width={50}
-              height={50}
+              width={80}
+              height={80}
             />
             <h3 className="text-3xl font-bold">Nebula Store</h3>
           </div>
@@ -46,10 +46,10 @@ export default function Navbar() {
 
         <div className="flex items-center space-x-4">
           <Link
-            href="/"
+            href="/home"
             className="p-1 text-gray-500 rounded-md text-2xl hover:text-blue-500 hover:bg-gray-300 transition duration-300"
           >
-            Home
+            Tienda
           </Link>
           <Link
             href="/about"
@@ -62,7 +62,7 @@ export default function Navbar() {
               href="/shoppingCart"
               className="p-1 text-gray-500 rounded-md text-2xl hover:text-blue-500 hover:bg-gray-300 transition duration-300"
             >
-              <BsCart4 className="h-10 w-10 rounded-full text-blue-400 p-1 hover:text-blue-500 hover:bg-gray-300 transition duration-300" />
+              <BsCart4 className="h-10 w-10  text-blue-400 p-1 hover:text-blue-500 hover:bg-gray-300 transition duration-300" />
             </Link>
           )}
           <div className="  p-2 rounded-full flex flex-row items-center">

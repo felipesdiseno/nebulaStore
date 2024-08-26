@@ -7,9 +7,9 @@ export default function Custom404() {
       style={{ backgroundImage: "url('/404.png')" }}
     >
       <div className="flex flex-col items-center justify-center h-full bg-black bg-opacity-50 mt-40 p-2 rounded-lg">
-        <Link href="/">
+        <Link href="/home">
           <h1 className="text-blue-500 hover:underline text-lg  ">
-            Volver a Home
+            Volver a tienda
           </h1>
         </Link>
       </div>
