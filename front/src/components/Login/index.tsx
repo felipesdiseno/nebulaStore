@@ -19,7 +19,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const responseMessage = await login(formData); // Llamamos a la función login del AuthContext
+      const responseMessage = await login(formData);
 
       Swal.fire({
         title: "Bienvenido!",
