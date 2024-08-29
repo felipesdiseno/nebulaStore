@@ -6,14 +6,14 @@
   "scripts": {
     "preinstall": "rm -rf node_modules",
     "build": "tsc",
-    "start": "node dist/index.js", 
-    "dev": "nodemon --exec ts-node src/index.ts" 
+    "start": "node dist/index.js",
+    "dev": "nodemon --exec ts-node src/index.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.1.1",
+    "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.18.2",
