@@ -5,8 +5,13 @@ import { CartContext } from "../../context/cartContext";
 import { useContext } from "react";
 
 function ShoppingCart() {
-  const { cartItems, removeFromCart, total } = useContext(CartContext);
+  const cartContext = useContext(CartContext);
+  if (!cartContext) {
+    // Maneja el caso en que el contexto es undefined
+    return <div>Error: No se puede acceder al carrito.</div>;
+  }
 
+  const { cartItems, removeFromCart, total } = cartContext;
   return (
     <div>
       {cartItems.length > 0 ? (

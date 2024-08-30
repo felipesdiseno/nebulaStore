@@ -3,12 +3,9 @@ import { IProduct } from "../interfaces/IProduct";
 import ICartContextType from "../interfaces/ICartContextType";
 import { useEffect, createContext, useState, ReactNode } from "react";
 
-export const CartContext = createContext<ICartContextType | undefined>({
-  cartItems: [],
-  addToCart: () => {},
-  removeFromCart: () => {},
-  total: 0,
-});
+export const CartContext = createContext<ICartContextType | undefined>(
+  undefined
+);
 
 const fetchProductById = async (
   productId: number

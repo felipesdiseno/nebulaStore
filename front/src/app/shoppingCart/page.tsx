@@ -5,6 +5,7 @@ import { IProduct } from "../../interfaces/IProduct";
 import { IoAlertCircleOutline } from "react-icons/io5";
 import { CartContext } from "../../context/cartContext";
 import { useRouter } from "next/navigation";
+
 const CartItem = ({
   product,
   remove,
@@ -12,8 +13,8 @@ const CartItem = ({
   product: IProduct;
   remove: () => void;
 }) => (
-  <div className=" mt-2 flex justify-between items-center p-2 bg-gray-100 rounded-lg">
-    <div className="flex items-center w-1/3 ">
+  <div className="mt-2 flex justify-between items-center p-2 bg-gray-100 rounded-lg">
+    <div className="flex items-center w-1/3">
       <img
         src={product.image}
         alt={product.name}
@@ -25,7 +26,7 @@ const CartItem = ({
     <div className="flex w-1/3 justify-center">
       <button
         onClick={remove}
-        className="bg-blue-500 text-white font-bold py-2 px-auto rounded-lg hover:bg-blue-700 transition duration-300 ml-2 w-10 text-center"
+        className="bg-blue-500 text-white font-bold py-2 rounded-lg hover:bg-blue-700 transition duration-300 ml-2 w-10 text-center"
       >
         X
       </button>
@@ -34,8 +35,19 @@ const CartItem = ({
 );
 
 function ShoppingCart() {
-  const { cartItems, removeFromCart, total } = useContext(CartContext);
+  const cartContext = useContext(CartContext);
   const router = useRouter();
+
+  if (!cartContext) {
+    return (
+      <div className="text-center text-3xl text-gray-600 py-6 flex flex-col">
+        <IoAlertCircleOutline className="w-20 h-20 font-bold text-purple-500 mx-auto mt-4" />
+        Error: No se pudo cargar el carrito.
+      </div>
+    );
+  }
+
+  const { cartItems, removeFromCart, total } = cartContext;
 
   const handlePurchase = () => {
     if (cartItems.length > 0) {
@@ -49,7 +61,7 @@ function ShoppingCart() {
     <div className="bg-gray-200 w-3/4 mx-auto my-8 p-4 rounded-lg shadow-lg">
       <div className="mt-2">
         <div className="flex flex-row justify-between text-gray-600 text-2xl font-bold items-center p-4 border-b border-gray-300">
-          <div className="w-1/3 ">Producto</div>
+          <div className="w-1/3">Producto</div>
           <div className="w-1/3 text-center">Precio</div>
           <div className="w-1/3 text-center">Eliminar</div>
         </div>

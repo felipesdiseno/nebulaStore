@@ -13,14 +13,18 @@ function Card({
 }) {
   const [showDetails, setShowDetails] = useState(false);
 
-  const { addToCart } = useContext(CartContext);
+  const cartContext = useContext(CartContext);
 
   const showDetailsCard = () => {
     setShowDetails(!showDetails);
   };
   const handleAddToCart = () => {
-    addToCart(product.id);
-    onAddToCart();
+    if (cartContext) {
+      cartContext.addToCart(product.id);
+      onAddToCart();
+    } else {
+      console.error("CartContext is undefined");
+    }
   };
 
   return (
