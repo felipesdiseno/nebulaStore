@@ -3,11 +3,11 @@ import React from "react";
 import { useAuth } from "@/context/authContext";
 import { useRouter } from "next/navigation";
 import { IoAlertCircleOutline } from "react-icons/io5";
-
+import { IRegisterUser } from "@/interfaces/IRegister";
 const ProfilePage = () => {
   const { user } = useAuth();
   const router = useRouter();
-
+  const typedUser = user as IRegisterUser;
   if (!user) {
     return (
       <div className="bg-gray-200 max-w-md mx-auto p-6 mt-10 rounded-xl shadow-lg">
@@ -36,16 +36,16 @@ const ProfilePage = () => {
       </div>
       <div className="bg-gray-100 p-6 rounded-xl shadow-md text-gray-700">
         <p className="text-lg ">
-          <strong>Nombre:</strong> {user.name}
+          <strong>Nombre:</strong> {typedUser.first_name} {typedUser.last_name}
         </p>
         <p className="text-lg">
           <strong>Email:</strong> {user.email}
         </p>
         <p className="text-lg">
-          <strong>Dirección:</strong> {user.address}
+          <strong>Dirección:</strong> {typedUser.address}
         </p>
         <p className="text-lg">
-          <strong>Teléfono:</strong> {user.phone}
+          <strong>Teléfono:</strong> {typedUser.phone}
         </p>
         <div className="flex justify-center">
           <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700">

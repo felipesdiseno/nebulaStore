@@ -28,13 +28,16 @@ function Register() {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/users/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataToSend),
-      });
+      const response = await fetch(
+        "https://pm4fsdeploy-7.onrender.com/users/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataToSend),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();

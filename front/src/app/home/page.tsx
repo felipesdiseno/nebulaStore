@@ -11,7 +11,9 @@ function Home() {
 
   useEffect(() => {
     async function fetchProducts() {
-      const response = await fetch("http://localhost:5000/products");
+      const response = await fetch(
+        "https://pm4fsdeploy-7.onrender.com/products"
+      );
       const products = await response.json();
       setProducts(products);
     }
