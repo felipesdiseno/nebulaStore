@@ -20,6 +20,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta property="og:title" content="Nebula store" />
+        <meta property="og:description" content="E-commerce de tecnologia" />
+        <meta property="og:image" content="/public/nebula3.png" />
+        <meta
+          property="og:url"
+          content="https://pm4fsdeploy-9eca.vercel.app/"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+
         <link rel="icon" href="/icons/nebula.png" />
         <title>Nebula store</title>
       </head>

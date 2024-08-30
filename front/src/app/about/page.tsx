@@ -17,7 +17,7 @@ export default function About() {
     <div className="m-4 p-6 bg-gray-200 rounded-xl max-w-4xl mx-auto shadow-md">
       <div className="bg-gray-100 p-2 rounded-xl shadow-md">
         <Image
-          src="/icons/nebula.png"
+          src="/icons/nebula3.png"
           alt="nebulaLogo"
           width={250}
           height={250}
