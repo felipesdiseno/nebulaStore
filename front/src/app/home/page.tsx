@@ -1,6 +1,6 @@
 "use client";
 
-import ProductList from "@/components/Productlist";
+import ProductList from "@/components/Productlist/ProductList";
 import { IProduct } from "@/interfaces/IProduct";
 import { useState, useEffect } from "react";
 import ToastedAlert from "@/components/ToastedALert";
