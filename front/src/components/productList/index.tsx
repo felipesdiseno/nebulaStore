@@ -4,7 +4,7 @@ import Card from "../card";
 import IProductsList from "@/interfaces/IProductsList";
 import { IProduct } from "@/interfaces/IProduct";
 
-export default function ProductList({ products, onAddToCart }: IProductsList) {
+const ProductList: React.FC<IProductsList> = ({ products, onAddToCart }) => {
   return (
     <div className="flex justify-center">
       <div className="grid grid-cols-3 grid-rows-2 gap-4">
@@ -14,4 +14,5 @@ export default function ProductList({ products, onAddToCart }: IProductsList) {
       </div>
     </div>
   );
-}
+};
+export default ProductList;
