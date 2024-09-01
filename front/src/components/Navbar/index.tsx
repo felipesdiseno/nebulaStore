@@ -1,11 +1,11 @@
 "use client";
 
-import { BsCart4 } from "react-icons/bs";
 import { FaUserCircle } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { useAuth } from "@/context/authContext";
+import { PiShoppingCartSimpleBold } from "react-icons/pi";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -27,10 +27,10 @@ export default function Navbar() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [user]);
 
   return (
-    <nav className="bg-white border-b border-gray-200 shadow-md sticky top-0 z-10">
+    <nav className="bg-white border-b border-gray-200 shadow-md sticky top-0 z-50">
       <div className="flex items-center justify-between px-4 py-2">
         <Link href="/">
           <div className="flex items-center p-1 rounded-md space-x-4 text-gray-500 hover:cursor-pointer  hover:text-gray-300 transition duration-300">
@@ -49,7 +49,7 @@ export default function Navbar() {
             href="/home"
             className="p-1 text-gray-500 rounded-md text-2xl hover:text-blue-500 hover:bg-gray-300 transition duration-300"
           >
-            Tienda
+            Catalogo
           </Link>
           <Link
             href="/about"
@@ -60,9 +60,9 @@ export default function Navbar() {
           {user && (
             <Link
               href="/shoppingCart"
-              className="p-1 text-gray-500 rounded-md text-2xl hover:text-blue-500 hover:bg-gray-300 transition duration-300"
+              className="p-1   text-2xl  transition duration-300"
             >
-              <BsCart4 className="h-10 w-10  text-blue-400 p-1 hover:text-blue-500 hover:bg-gray-300 transition duration-300" />
+              <PiShoppingCartSimpleBold className="h-10 w-10  text-blue-400 rounded-xl p-1 hover:text-blue-500  hover:bg-gray-200 transition duration-300" />
             </Link>
           )}
           <div className="  p-2 rounded-full flex flex-row items-center">
