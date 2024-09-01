@@ -55,7 +55,7 @@ export default function Navbar() {
             href="/about"
             className="p-1 text-gray-500 rounded-md text-2xl hover:text-blue-500 hover:bg-gray-300 transition duration-300"
           >
-            Acerca de
+            Conocenos
           </Link>
           {user && (
             <Link
