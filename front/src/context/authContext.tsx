@@ -15,22 +15,34 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<IUser | null>(null);
 
   useEffect(() => {
-    try {
-      const storedUser = localStorage.getItem("user");
-      if (storedUser) {
-        const parsedData: IUser = JSON.parse(storedUser);
-        if (parsedData && parsedData.id && parsedData.email) {
-          setUser(parsedData);
-        } else {
-          console.warn(
-            "El usuario almacenado no tiene la estructura correcta."
+    const checkAuth = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (token) {
+          const response = await fetch(
+            "https://pm4fsdeploy-7.onrender.com/users",
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
           );
+
+          if (response.ok) {
+            const userData: IUser = await response.json();
+            setUser(userData);
+          } else {
+            console.warn("No se pudo verificar el usuario.");
+          }
         }
+      } catch (error) {
+        console.error("Error al verificar la autenticación:", error);
       }
-    } catch (error) {
-      console.error("Error al parsear el usuario almacenado:", error);
-      localStorage.removeItem("user");
-    }
+    };
+
+    checkAuth();
   }, []);
 
   const login = async (data: {
@@ -38,14 +50,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     password: string;
   }): Promise<string> => {
     try {
-      const { email, password } = data;
-      console.log("Datos enviados:", { email, password });
       const response = await fetch(
         "https://pm4fsdeploy-7.onrender.com/users/login",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: data.email, password: data.password }),
+          body: JSON.stringify(data),
         }
       );
 
@@ -56,8 +66,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
       const { user, token }: { user: IUser; token: string } =
         await response.json();
-      console.log("Usuario autenticado:", user);
-
       setUser(user);
       localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("token", token);
