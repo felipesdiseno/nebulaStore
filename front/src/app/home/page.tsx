@@ -4,10 +4,15 @@ import ProductList from "@/components/Productlist/ProductList";
 import { IProduct } from "@/interfaces/IProduct";
 import { useState, useEffect } from "react";
 import ToastedAlert from "@/components/ToastedALert";
+import Swal from "sweetalert2";
+import { useAuth } from "@/context/authContext";
+import { useRouter } from "next/navigation";
 
 function Home() {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [showAlert, setShowAlert] = useState(false);
+  const { user } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
     async function fetchProducts() {
@@ -22,10 +27,28 @@ function Home() {
   }, []);
 
   const handleAddToCart = () => {
-    setShowAlert(true);
-    setTimeout(() => {
-      setShowAlert(false);
-    }, 2000);
+    if (user) {
+      setShowAlert(true);
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 2000);
+    } else {
+      Swal.fire({
+        title: "Debes estar logueado",
+        text: "Por favor, inicia sesión o regístrate para agregar productos al carrito.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Iniciar sesión",
+        cancelButtonText: "Cancelar",
+        customClass: {
+          cancelButton: "swal2-cancel",
+        },
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push("/authentication");
+        }
+      });
+    }
   };
 
   return (
