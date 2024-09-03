@@ -22,3 +22,6 @@ body {
     opacity: 1;
   }
 }
+.swal2-cancel {
+  @apply bg-red-500 text-white border-none;
+}
