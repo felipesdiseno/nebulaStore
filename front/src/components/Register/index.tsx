@@ -19,13 +19,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       try {
         const token = localStorage.getItem("token");
         if (token) {
-          const response = await fetch("pm4fsdeploy-7.onrender.com/users", {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          });
+          const response = await fetch(
+            "https://pm4fsdeploy-7.onrender.com/users",
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
 
           if (response.ok) {
             const userData: IUser = await response.json();
