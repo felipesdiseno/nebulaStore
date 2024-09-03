@@ -4,6 +4,7 @@ import { useState, FormEvent } from "react";
 import { useAuth } from "@/context/authContext";
 import IRegisterFormData from "@/interfaces/IRegisterFormData";
 import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 function Register() {
   const [formData, setFormData] = useState<IRegisterFormData>({
@@ -16,6 +17,7 @@ function Register() {
   });
 
   const { login } = useAuth();
+  const router = useRouter();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,7 +31,7 @@ function Register() {
 
     try {
       const response = await fetch(
-        "https://pm4fsdeploy-7.onrender.com/users/register",
+        "pm4fsdeploy-7.onrender.com/users/register",
         {
           method: "POST",
           headers: {
@@ -41,14 +43,18 @@ function Register() {
 
       if (response.ok) {
         const data = await response.json();
-        login(data);
+
+        await login({
+          email: formData.email,
+          password: formData.password,
+        });
 
         Swal.fire({
           title: "Bienvenido!",
           text: "Registro exitoso con: " + formData.email,
           icon: "success",
         }).then(() => {
-          window.location.href = "/home";
+          router.push("/home");
         });
       } else {
         const errorData = await response.json();
